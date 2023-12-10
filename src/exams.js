@@ -1,38 +1,56 @@
-import months from './months.js'
+import bandas from './bandas.js'
 
-// Filtra meses
-const filteredMonths = months.filter( (months)=> {
-    return months.days === 31
+//FILTER
+// Filtra bandas ativas
+const filterBands = bandas.filter( (bandas)=> {
+    return bandas.ativa == true
 })
 
-console.log(filteredMonths)
+console.log(filterBands)
 
-let toPrint = ''
+// Filtra bandas aposentadas
+const bandasAposentadas = bandas.filter((bandas) => {
+    return bandas.ativa == false
+    })
+    
+    console.log(bandasAposentadas)
 
-// Lista meses
-filteredMonths.forEach(month => {
-   toPrint += month.month + ', '
-});
+//Filtra bandas que ganharam Grammys
 
-// for( let c = 0; c < filteredMonths.length; c++ ){
+let grammy = bandas.filter((bandas) => {
+    return bandas.grammys >= '1'
+    })
 
-// }
+console.log(grammy)
 
-let meses = [30,30,30] // array comum
+// MAP
+//Idade bandas ativas 
+const anosAtiva = filterBands.map (aux => ({banda: aux.banda, ativa: 2023 - aux.inicio}))
 
-// Reduce - função com todos os itens do array e devolve um valor único
-let sumMonthDays = filteredMonths.reduce( (prev, next) => {
-    return {days: prev.days + next.days}
-})
+for (const idade of anosAtiva) {
+console.log(`A ${idade.banda} está ativa há ${idade.ativa} anos`)
+}
 
-// Map - funções em arrays de retorno individual (cada valor array)
-let cachorros = [10, 15, 7, 8, 9]
+//Tempo de atividade Bandas aposentadas
+const anosAtivos = bandasAposentadas.map(aux => ({banda: aux.banda, ativa: aux.fim - aux.inicio}))
 
-let years = cachorros.map( (cachorro => {
-    return cachorro * 7
-}))
+for (const anos of anosAtivos) {
+console.log(`A banda ${anos.banda} ficou ativa por ${anos.ativa} anos`)
+}
 
-document.getElementById('main').innerHTML = 
-    toPrint + '<br> Soma dos dias dos meses selecionados: ' 
-    + sumMonthDays.days + '<br> idade humana dos cachorros: '  
-    + years + ' '
+
+//REDUCE
+// Soma os Grammys
+const somaGrammys = bandas.reduce((accumulator, object) => {
+	return accumulator + object.grammys;
+  }, 0);
+  
+  console.log(`Juntas, estas bandas conquistaram ${somaGrammys} Grammy Awards`);
+
+  // Soma os álbuns
+
+const somaAlbuns = bandas.reduce((accumulator, object) => {
+	return accumulator + object.albuns;
+}, 0);
+
+	console.log(`Juntas, estas bandas lançaram ${somaAlbuns} albuns`)

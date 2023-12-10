@@ -1,6 +1,7 @@
 {
   "name": "javascript",
   "version": "1.0.0",
+  "type": "module",
   "description": "- Fórmula / Molde dinâmico - Coleção de propriedas (atribuitos) - Associáveis (chave / valor) - Relação com objetos da vida real - Atributos: cor, forma, material, peso, identificação, etc.",
   "main": "index.js",
   "dependencies": {
